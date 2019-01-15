@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JIStudentsManagerDB.Models.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,14 @@ namespace JIStudentsManagerDB.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            List<Student> students;
+
+            using (StudentsManagerEntities db = new StudentsManagerEntities())
+            {
+                students = db.Students.ToList();
+            }
+
+            return View(students);
         }
     }
 }
